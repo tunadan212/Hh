@@ -1,4 +1,4 @@
--- Khngscript: Loading 8s -> Hub (PlayerGui) + Duplicate v2 có tiến độ 1%-100% trong 10s
+-- Khngscript Hub (PlayerGui, 8s loading, Add Brainrot)
 local Players=game:GetService("Players")
 local UIS=game:GetService("UserInputService")
 local VIM=game:GetService("VirtualInputManager")
@@ -193,45 +193,45 @@ local function ShowProgress10s()
     fill.BorderSizePixel=0
     Instance.new("UICorner",fill).CornerRadius=UDim.new(0,12)
 
-    -- chạy từ 1 -> 100% trong 10 giây (0.1s mỗi %)
     task.spawn(function()
-        local steps=100
-        local stepTime=10/steps
-        for i=1,steps do
-            percentLabel.Text = tostring(i).."%"
-            fill.Size = UDim2.new(i/100,0,1,0)
-            task.wait(stepTime)
+        for i=1,100 do
+            percentLabel.Text=tostring(i).."%"
+            fill.Size=UDim2.new(i/100,0,1,0)
+            task.wait(0.1)
         end
         title.Text="Success"
         percentLabel.Text="100%"
-        task.wait(0.6)
+        task.wait(0.8)
         modal:Destroy()
     end)
 end
 
--- 🧠 Duplicate (P) — KHÔNG hiện toast
-local btnClone=pill(body,"🧠 Duplicate"); pillColor(btnClone,114,106,240)
+-- 🧠 Add Brainrot (P)
+local btnClone=pill(body,"🧠 Add Brainrot"); pillColor(btnClone,114,106,240)
 btnClone.MouseButton1Click:Connect(function()
-    VIM:SendKeyEvent(true,Enum.KeyCode.P,false,game); VIM:SendKeyEvent(false,Enum.KeyCode.P,false,game)
+    VIM:SendKeyEvent(true,Enum.KeyCode.P,false,game)
+    VIM:SendKeyEvent(false,Enum.KeyCode.P,false,game)
 end)
 
--- 🧠 Duplicate v2 — chạy loadstring + hiển thị tiến độ 10s và Success, KHÔNG toast
+-- 🧠 Duplicate v2
 local btnClone2=pill(body,"🧠 Duplicate v2"); pillColor(btnClone2,114,106,240)
 btnClone2.MouseButton1Click:Connect(function()
-    btnClone2.Text="Duplicating..."; pillColor(btnClone2,70,200,90)
+    btnClone2.Text="Duplicating..."
+    pillColor(btnClone2,70,200,90)
     ShowProgress10s()
     task.defer(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tunadan212/Kkkk/refs/heads/main/K"))()
     end)
 end)
 
--- 🎉 Execute Event (Q) — KHÔNG toast
+-- 🎉 Execute Event (Q)
 local btnExec=pill(body,"🎉 Execute Event"); pillColor(btnExec,114,106,240)
 btnExec.MouseButton1Click:Connect(function()
-    VIM:SendKeyEvent(true,Enum.KeyCode.Q,false,game); VIM:SendKeyEvent(false,Enum.KeyCode.Q,false,game)
+    VIM:SendKeyEvent(true,Enum.KeyCode.Q,false,game)
+    VIM:SendKeyEvent(false,Enum.KeyCode.Q,false,game)
 end)
 
--- 🤤 Spawn Brainrot (R) + textbox — KHÔNG toast
+-- 🤤 Spawn Brainrot (R)
 local btnSpawn=pill(body,"🤤 Spawn Brainrot"); pillColor(btnSpawn,70,180,110)
 local tb=Instance.new("TextBox",body)
 tb.Size=UDim2.new(0.5,-6,0,46)
@@ -244,7 +244,8 @@ tb.ClearTextOnFocus=false
 Instance.new("UICorner",tb).CornerRadius=UDim.new(0,12)
 local tbs=Instance.new("UIStroke",tb) tbs.Color=Color3.fromRGB(84,130,255) tbs.Thickness=1
 btnSpawn.MouseButton1Click:Connect(function()
-    VIM:SendKeyEvent(true,Enum.KeyCode.R,false,game); VIM:SendKeyEvent(false,Enum.KeyCode.R,false,game)
+    VIM:SendKeyEvent(true,Enum.KeyCode.R,false,game)
+    VIM:SendKeyEvent(false,Enum.KeyCode.R,false,game)
 end)
 
 -- Panel tròn
