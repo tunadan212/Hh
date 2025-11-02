@@ -1,4 +1,4 @@
--- Khngscript Hub (PlayerGui, 8s loading, Add Brainrot)
+-- Khngscript Hub (PlayerGui): 8s loading, Add Brainrot, Duplicate v2 (progress 10s), Lucky Block panel riêng
 local Players=game:GetService("Players")
 local UIS=game:GetService("UserInputService")
 local VIM=game:GetService("VirtualInputManager")
@@ -9,6 +9,7 @@ local PG=LP:WaitForChild("PlayerGui")
 local GUI_NAME="Khngscript_AllInOne_PG"
 local old=PG:FindFirstChild(GUI_NAME); if old then old:Destroy() end
 
+-- helpers
 local function pill(parent,text)
     local b=Instance.new("TextButton")
     b.Size=UDim2.new(0.48,0,0,46)
@@ -111,8 +112,8 @@ TweenService:Create(fill,TweenInfo.new(8,Enum.EasingStyle.Linear),{Size=UDim2.ne
 -- Main Hub (ẩn tới khi xong loading)
 local frame=Instance.new("Frame",gui)
 frame.Visible=false
-frame.Size=UDim2.new(0,440,0,240)
-frame.Position=UDim2.new(0.5,-220,0.5,-120)
+frame.Size=UDim2.new(0,440,0,260)
+frame.Position=UDim2.new(0.5,-220,0.5,-130)
 frame.BackgroundColor3=Color3.fromRGB(20,22,26)
 frame.BorderSizePixel=0
 frame.Active=true
@@ -147,7 +148,7 @@ layout.FillDirectionMaxCells=2
 layout.HorizontalAlignment=Enum.HorizontalAlignment.Center
 layout.VerticalAlignment=Enum.VerticalAlignment.Top
 
--- === Hộp tiến độ 10s cho Duplicate v2 ===
+-- === Progress 10s cho Duplicate v2
 local function ShowProgress10s()
     if gui:FindFirstChild("KS_ProgressModal") then gui.KS_ProgressModal:Destroy() end
     local modal=Instance.new("Frame",gui)
@@ -159,65 +160,66 @@ local function ShowProgress10s()
     modal.BorderSizePixel=0
     Instance.new("UICorner",modal).CornerRadius=UDim.new(0,16)
 
-    local title=Instance.new("TextLabel",modal)
-    title.BackgroundTransparency=1
-    title.Position=UDim2.new(0,16,0,12)
-    title.Size=UDim2.new(1,-32,0,26)
-    title.Font=Enum.Font.GothamBold
-    title.TextSize=20
-    title.TextColor3=Color3.fromRGB(255,255,255)
-    title.TextXAlignment=Enum.TextXAlignment.Left
-    title.Text="Duplicate v2"
+    local mt=Instance.new("TextLabel",modal)
+    mt.BackgroundTransparency=1
+    mt.Position=UDim2.new(0,16,0,12)
+    mt.Size=UDim2.new(1,-32,0,26)
+    mt.Font=Enum.Font.GothamBold
+    mt.TextSize=20
+    mt.TextColor3=Color3.fromRGB(255,255,255)
+    mt.TextXAlignment=Enum.TextXAlignment.Left
+    mt.Text="Duplicate v2"
 
-    local percentLabel=Instance.new("TextLabel",modal)
-    percentLabel.BackgroundTransparency=1
-    percentLabel.Position=UDim2.new(0,16,0,44)
-    percentLabel.Size=UDim2.new(1,-32,0,22)
-    percentLabel.Font=Enum.Font.Gotham
-    percentLabel.TextSize=18
-    percentLabel.TextColor3=Color3.fromRGB(210,210,215)
-    percentLabel.TextXAlignment=Enum.TextXAlignment.Left
-    percentLabel.Text="1%"
+    local percent=Instance.new("TextLabel",modal)
+    percent.BackgroundTransparency=1
+    percent.Position=UDim2.new(0,16,0,44)
+    percent.Size=UDim2.new(1,-32,0,22)
+    percent.Font=Enum.Font.Gotham
+    percent.TextSize=18
+    percent.TextColor3=Color3.fromRGB(210,210,215)
+    percent.TextXAlignment=Enum.TextXAlignment.Left
+    percent.Text="1%"
 
-    local barBg=Instance.new("Frame",modal)
-    barBg.AnchorPoint=Vector2.new(0.5,0)
-    barBg.Position=UDim2.new(0.5,0,0,76)
-    barBg.Size=UDim2.new(0.9,0,0,24)
-    barBg.BackgroundColor3=Color3.fromRGB(45,45,45)
-    barBg.BorderSizePixel=0
-    Instance.new("UICorner",barBg).CornerRadius=UDim.new(0,12)
+    local pbg=Instance.new("Frame",modal)
+    pbg.AnchorPoint=Vector2.new(0.5,0)
+    pbg.Position=UDim2.new(0.5,0,0,76)
+    pbg.Size=UDim2.new(0.9,0,0,24)
+    pbg.BackgroundColor3=Color3.fromRGB(45,45,45)
+    pbg.BorderSizePixel=0
+    Instance.new("UICorner",pbg).CornerRadius=UDim.new(0,12)
 
-    local fill=Instance.new("Frame",barBg)
-    fill.Size=UDim2.new(0,0,1,0)
-    fill.BackgroundColor3=Color3.fromRGB(70,200,90)
-    fill.BorderSizePixel=0
-    Instance.new("UICorner",fill).CornerRadius=UDim.new(0,12)
+    local pf=Instance.new("Frame",pbg)
+    pf.Size=UDim2.new(0,0,1,0)
+    pf.BackgroundColor3=Color3.fromRGB(70,200,90)
+    pf.BorderSizePixel=0
+    Instance.new("UICorner",pf).CornerRadius=UDim.new(0,12)
 
     task.spawn(function()
         for i=1,100 do
-            percentLabel.Text=tostring(i).."%"
-            fill.Size=UDim2.new(i/100,0,1,0)
+            percent.Text=tostring(i).."%"
+            pf.Size=UDim2.new(i/100,0,1,0)
             task.wait(0.1)
         end
-        title.Text="Success"
-        percentLabel.Text="100%"
+        mt.Text="Success"
+        percent.Text="100%"
         task.wait(0.8)
         modal:Destroy()
     end)
 end
 
+-- ==== Nút chính trong Hub
 -- 🧠 Add Brainrot (P)
-local btnClone=pill(body,"🧠 Add Brainrot"); pillColor(btnClone,114,106,240)
-btnClone.MouseButton1Click:Connect(function()
+local btnAdd=pill(body,"🧠 Add Brainrot"); pillColor(btnAdd,114,106,240)
+btnAdd.MouseButton1Click:Connect(function()
     VIM:SendKeyEvent(true,Enum.KeyCode.P,false,game)
     VIM:SendKeyEvent(false,Enum.KeyCode.P,false,game)
 end)
 
--- 🧠 Duplicate v2
-local btnClone2=pill(body,"🧠 Duplicate v2"); pillColor(btnClone2,114,106,240)
-btnClone2.MouseButton1Click:Connect(function()
-    btnClone2.Text="Duplicating..."
-    pillColor(btnClone2,70,200,90)
+-- 🧠 Duplicate v2 (progress 10s + loadstring)
+local btnDup2=pill(body,"🧠 Duplicate v2"); pillColor(btnDup2,114,106,240)
+btnDup2.MouseButton1Click:Connect(function()
+    btnDup2.Text="Duplicating..."
+    pillColor(btnDup2,70,200,90)
     ShowProgress10s()
     task.defer(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/tunadan212/Kkkk/refs/heads/main/K"))()
@@ -248,7 +250,91 @@ btnSpawn.MouseButton1Click:Connect(function()
     VIM:SendKeyEvent(false,Enum.KeyCode.R,false,game)
 end)
 
--- Panel tròn
+-- 🍀 Lucky Block (mở panel riêng)
+local btnLucky=pill(body,"🍀 Lucky Block"); pillColor(btnLucky,114,106,240)
+
+-- === Lucky Block Panel (riêng, kéo thả, có nút close)
+local function ShowLuckyPanel()
+    local existed=gui:FindFirstChild("KS_LuckyPanel")
+    if existed then existed.Visible=true return end
+
+    local p=Instance.new("Frame")
+    p.Name="KS_LuckyPanel"
+    p.Size=UDim2.new(0,460,0,170)
+    p.Position=UDim2.new(0.5,-230,0.5,-85)
+    p.BackgroundColor3=Color3.fromRGB(20,22,26)
+    p.BorderSizePixel=0
+    p.Parent=gui
+    Instance.new("UICorner",p).CornerRadius=UDim.new(0,14)
+    local ps=Instance.new("UIStroke",p) ps.Color=Color3.fromRGB(85,85,95) ps.Thickness=1
+
+    local bar=Instance.new("Frame",p)
+    bar.Size=UDim2.new(1,0,0,42)
+    bar.BackgroundColor3=Color3.fromRGB(28,30,36)
+    bar.BorderSizePixel=0
+    bar.Active=true
+    Instance.new("UICorner",bar).CornerRadius=UDim.new(0,14)
+
+    local ttl=Instance.new("TextLabel",bar)
+    ttl.BackgroundTransparency=1
+    ttl.Position=UDim2.new(0,14,0,0)
+    ttl.Size=UDim2.new(1,-60,1,0)
+    ttl.Font=Enum.Font.GothamBold
+    ttl.TextSize=18
+    ttl.TextColor3=Color3.fromRGB(235,235,245)
+    ttl.TextXAlignment=Enum.TextXAlignment.Left
+    ttl.Text="Lucky Block"
+    dragify(bar,p)
+
+    local close=Instance.new("TextButton",bar)
+    close.AnchorPoint=Vector2.new(1,0.5)
+    close.Position=UDim2.new(1,-8,0.5,0)
+    close.Size=UDim2.new(0,28,0,28)
+    close.BackgroundColor3=Color3.fromRGB(45,45,50)
+    close.Text="✕"
+    close.TextColor3=Color3.fromRGB(255,255,255)
+    close.Font=Enum.Font.GothamBold
+    close.TextSize=16
+    Instance.new("UICorner",close).CornerRadius=UDim.new(1,0)
+    close.MouseButton1Click:Connect(function() p.Visible=false end)
+
+    -- hàng nhập + nút set
+    local row=Instance.new("Frame",p)
+    row.BackgroundTransparency=1
+    row.Size=UDim2.new(1,-24,0,50)
+    row.Position=UDim2.new(0,12,0,62)
+
+    local luckyInput=Instance.new("TextBox",row)
+    luckyInput.Size=UDim2.new(0.62,0,1,0)
+    luckyInput.BackgroundColor3=Color3.fromRGB(35,36,40)
+    luckyInput.Text="nhập tên brainrot cần set"
+    luckyInput.TextColor3=Color3.fromRGB(220,220,230)
+    luckyInput.Font=Enum.Font.Gotham
+    luckyInput.TextSize=16
+    luckyInput.ClearTextOnFocus=false
+    Instance.new("UICorner",luckyInput).CornerRadius=UDim.new(0,12)
+    local ls=Instance.new("UIStroke",luckyInput) ls.Color=Color3.fromRGB(84,130,255) ls.Thickness=1
+
+    local luckyBtn=Instance.new("TextButton",row)
+    luckyBtn.Size=UDim2.new(0.34,0,1,0)
+    luckyBtn.Position=UDim2.new(0.66,0,0,0)
+    luckyBtn.BackgroundColor3=Color3.fromRGB(114,106,240)
+    luckyBtn.Text="Set Brainrot in Lucky Block"
+    luckyBtn.TextColor3=Color3.fromRGB(255,255,255)
+    luckyBtn.Font=Enum.Font.GothamSemibold
+    luckyBtn.TextSize=16
+    Instance.new("UICorner",luckyBtn).CornerRadius=UDim.new(0,12)
+    local lbs=Instance.new("UIStroke",luckyBtn) lbs.Thickness=1.2 lbs.Color=Color3.fromRGB(255,255,255) lbs.Transparency=0.75
+
+    luckyBtn.MouseButton1Click:Connect(function()
+        print("✅ Set Brainrot in Lucky Block:", luckyInput.Text)
+        -- TODO: Thay bằng logic thật (gửi sự kiện/HTTP/loadstring...) nếu bạn muốn
+    end)
+end
+
+btnLucky.MouseButton1Click:Connect(ShowLuckyPanel)
+
+-- Panel tròn ẩn/hiện Hub
 local panel=Instance.new("ImageButton",gui)
 panel.Visible=false
 panel.Size=UDim2.new(0,64,0,64)
@@ -257,7 +343,7 @@ panel.Position=UDim2.new(1,-16,1,-16)
 panel.BackgroundColor3=Color3.fromRGB(28,30,36)
 panel.Image="rbxassetid://115555110268657"
 Instance.new("UICorner",panel).CornerRadius=UDim.new(1,0)
-local ps=Instance.new("UIStroke",panel) ps.Color=Color3.fromRGB(84,130,255) ps.Thickness=1.2
+local ps2=Instance.new("UIStroke",panel) ps2.Color=Color3.fromRGB(84,130,255) ps2.Thickness=1.2
 dragify(panel,panel)
 local visible=true
 panel.MouseButton1Click:Connect(function() visible=not visible; frame.Visible=visible end)
