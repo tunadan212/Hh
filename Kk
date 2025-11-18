@@ -580,4 +580,73 @@ end)
 local btnExec = pill(body, "🎉 Execute Event"); pillColor(btnExec, 114, 106, 240)
 btnExec.MouseButton1Click:Connect(function()
     VIM:SendKeyEvent(true, Enum.KeyCode.Q, false, game)
-    VIM:SendKeyEvent(false, Enum.KeyCode.Q, fal
+    VIM:SendKeyEvent(false, Enum.KeyCode.Q, false, game)
+end)
+
+-- 🤤 Spawn Brainrot (R) + textbox
+local btnSpawn = pill(body, "🤤 Spawn Brainrot"); pillColor(btnSpawn, 70, 180, 110)
+
+local tb = Instance.new("TextBox", body)
+tb.Size = UDim2.new(0.5, -6, 0, 46)
+tb.BackgroundColor3 = Color3.fromRGB(35, 36, 40)
+tb.Text = "Enter Brainrot"
+tb.TextColor3 = Color3.fromRGB(220, 220, 230)
+tb.Font = Enum.Font.Gotham
+tb.TextSize = 16
+tb.ClearTextOnFocus = false
+Instance.new("UICorner", tb).CornerRadius = UDim.new(0, 12)
+local tbs = Instance.new("UIStroke", tb)
+tbs.Color = Color3.fromRGB(84, 130, 255)
+tbs.Thickness = 1
+
+btnSpawn.MouseButton1Click:Connect(function()
+    VIM:SendKeyEvent(true, Enum.KeyCode.R, false, game)
+    VIM:SendKeyEvent(false, Enum.KeyCode.R, false, game)
+end)
+
+-- 🍀 Lucky Block
+local btnLucky = pill(body, "🍀 Lucky Block"); pillColor(btnLucky, 114, 106, 240)
+btnLucky.MouseButton1Click:Connect(ShowLuckyPanel)
+
+-- 🛒 Auto Buy Dealer
+local btnAuto = pill(body, "🎣Auto Fishing"); pillColor(btnAuto, 114, 106, 240)
+btnAuto.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/LucasggkX/Games/refs/heads/main/Auto%20Fishing.lua"))()
+end)
+
+-- 📋 Menu
+local btnMenu = pill(body, "📋 Menu"); pillColor(btnMenu, 114, 106, 240)
+btnMenu.MouseButton1Click:Connect(ShowMenuPanel)
+
+----------------------------------------------------------------
+-- Panel tròn góc phải ẩn/hiện Hub
+----------------------------------------------------------------
+
+local panel = Instance.new("ImageButton", gui)
+panel.Visible = false
+panel.Size = UDim2.new(0, 64, 0, 64)
+panel.AnchorPoint = Vector2.new(1, 1)
+panel.Position = UDim2.new(1, -16, 1, -16)
+panel.BackgroundColor3 = Color3.fromRGB(28, 30, 36)
+panel.Image = "rbxassetid://115555110268657"
+Instance.new("UICorner", panel).CornerRadius = UDim.new(1, 0)
+
+local ps2 = Instance.new("UIStroke", panel)
+ps2.Color = Color3.fromRGB(84, 130, 255)
+ps2.Thickness = 1.2
+
+dragify(panel, panel)
+
+local visible = true
+panel.MouseButton1Click:Connect(function()
+    visible = not visible
+    frame.Visible = visible
+end)
+
+-- Kết thúc loading 8s -> show Hub + panel
+task.delay(8, function()
+    if bg then bg:Destroy() end
+    if box then box:Destroy() end
+    frame.Visible = true
+    panel.Visible = true
+end)
