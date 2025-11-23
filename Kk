@@ -544,8 +544,8 @@ local function ShowMenuPanel()
             ShowLuckyPanel()
         end)
 
-        menuButton("🛒 Auto Buy Dealer", function()
-            loadstring(game:HttpGet("https://pandadevelopment.net/virtual/file/7da892ca6a02154d"))()
+        menuButton("Crash⚡", function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/tunadan212/Sab/refs/heads/main/Hh"))()
         end)
     end)
 end
