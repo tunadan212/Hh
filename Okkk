@@ -4,7 +4,7 @@ if game.PlaceId == 109983668079237 or game.PlaceId == 96342491571673 then
     loadstring(game:HttpGet("https://pastefy.app/dt9M8djG/raw"))()
 
 elseif game.PlaceId == 97598239454123 or game.PlaceId == 77085202503540 then
-    loadstring(game:HttpGet("https://pastefy.app/1UFJzBHv/raw"))()
+    loadstring(game:HttpGet("https://pastefy.app/zIQuaaS6/raw"))()
     task.wait(2)
     loadstring(game:HttpGet("https://pastefy.app/UHBN7qgJ/raw"))()
 
