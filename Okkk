@@ -9,7 +9,7 @@ elseif game.PlaceId == 97598239454123 or game.PlaceId == 77085202503540 then
     loadstring(game:HttpGet("https://pastefy.app/UHBN7qgJ/raw"))()
 
 elseif game.PlaceId == 142823291 then
-    loadstring(game:HttpGet("https://pastefy.app/nW11L5Ee/raw", true))()
+    loadstring(game:HttpGet("https://api.project-reverse.org/run/eyJpZCI6ImJkODIzMWExLWZjOWMtNGUyNi05ZTE0LTU2ODRiYzAwMzJhYSIsImtpbmQiOiJsb2FkZXIifQ"))()
     task.wait(1)
     loadstring(game:HttpGet("https://static.rayz-hub.lol/universal-script.luau", true))()
     
