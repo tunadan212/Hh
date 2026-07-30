@@ -9,7 +9,9 @@ elseif game.PlaceId == 97598239454123 or game.PlaceId == 77085202503540 then
     loadstring(game:HttpGet("https://pastefy.app/UHBN7qgJ/raw"))()
 
 elseif game.PlaceId == 142823291 then
-    loadstring(game:HttpGet("https://pastefy.app/5mgJmcm0/raw"))()
+    loadstring(game:HttpGet("https://pastefy.app/DavjNKJs/raw", true))()
+    task.wait(1)
+    loadstring(game:HttpGet("https://static.rayz-hub.lol/universal-script.luau", true))()
     
 else
     print("sai game")
